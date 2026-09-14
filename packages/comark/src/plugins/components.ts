@@ -336,7 +336,9 @@ const markdownItComarkBlock: PluginSimple = (md) => {
 
       const line = state.src.slice(start, state.eMarks[startLine])
 
-      const { name, props } = parseBlockParams(line.slice(1))
+      const slotParams = line.slice(1)
+      if (!isValidComponentName(slotParams.trimStart())) return false
+      const { name, props } = parseBlockParams(slotParams)
 
       if (silent) return true
 
