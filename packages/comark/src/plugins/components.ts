@@ -338,7 +338,8 @@ const markdownItComarkBlock: PluginSimple = (md) => {
 
       const slotParams = line.slice(1)
       if (!isValidComponentName(slotParams.trimStart())) return false
-      const { name, props } = parseBlockParams(slotParams)
+      const { name, props, remaining } = parseBlockParams(slotParams)
+      if (remaining) return false
 
       if (silent) return true
 
